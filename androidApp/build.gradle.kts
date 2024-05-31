@@ -41,5 +41,8 @@ android {
 
 dependencies {
     implementation(projects.shared)
+
     implementation(libs.bundles.compose.android)
+    implementation(libs.bundles.androidX)
+    implementation(libs.bundles.koinAndroid)
 }

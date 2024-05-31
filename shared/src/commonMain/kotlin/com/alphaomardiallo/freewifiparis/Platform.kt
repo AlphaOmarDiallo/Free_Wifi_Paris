@@ -1,7 +1,5 @@
 package com.alphaomardiallo.freewifiparis
 
-interface Platform {
-    val name: String
-}
+import org.koin.core.module.Module
 
-expect fun getPlatform(): Platform
+expect fun platformModule(): Module
