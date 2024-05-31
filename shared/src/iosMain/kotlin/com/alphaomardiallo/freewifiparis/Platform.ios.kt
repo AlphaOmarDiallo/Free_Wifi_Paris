@@ -1,9 +1,9 @@
 package com.alphaomardiallo.freewifiparis
 
-import platform.UIKit.UIDevice
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.darwin.Darwin
+import org.koin.dsl.module
 
-class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+actual fun platformModule() = module {
+    single<HttpClientEngine> { Darwin.create() }
 }
-
-actual fun getPlatform(): Platform = IOSPlatform()

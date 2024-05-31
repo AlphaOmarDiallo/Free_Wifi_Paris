@@ -18,6 +18,8 @@ compileSdk = "34"
 minSdk = "26"
 versionCode = "1"
 versionName = "1.0"
+androidxNavigationCompose = "2.8.0-beta01"
+androidxLifecycle = "2.8.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -62,6 +64,12 @@ koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 
+# AndroidX
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigationCompose" }
+androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -73,6 +81,5 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
 compose-android = ["compose-ui", "compose-ui-tooling-preview", "compose-material3", "androidx-activity-compose", "compose-ui-tooling"]
-
-
-
+androidX = ["androidx-lifecycle-compose", "androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx", "androidx-navigation-compose"]
+koinAndroid = ["koin-core", "koin-android", "koin-androidx-compose"]

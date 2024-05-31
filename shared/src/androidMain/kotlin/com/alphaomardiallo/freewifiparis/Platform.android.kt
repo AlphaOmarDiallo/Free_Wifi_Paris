@@ -1,7 +1,9 @@
 package com.alphaomardiallo.freewifiparis
 
-class AndroidPlatform : Platform {
-    override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
-}
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.android.Android
+import org.koin.dsl.module
 
-actual fun getPlatform(): Platform = AndroidPlatform()
+actual fun platformModule() = module {
+    single<HttpClientEngine> { Android.create() }
+}
