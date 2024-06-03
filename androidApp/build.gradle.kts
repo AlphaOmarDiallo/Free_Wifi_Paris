@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kotlin.serialization)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -37,6 +38,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    secrets {
+        propertiesFileName = "androidApp/secrets.properties"
+        defaultPropertiesFileName = "androidApp/local.defaults.properties"
+    }
 }
 
 dependencies {
@@ -45,4 +50,7 @@ dependencies {
     implementation(libs.bundles.compose.android)
     implementation(libs.bundles.androidX)
     implementation(libs.bundles.koinAndroid)
+
+    implementation(libs.maps.play.service)
+    implementation(libs.maps.compose)
 }
