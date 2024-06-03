@@ -12,11 +12,11 @@ class HotSpotsDataSource(private val hotSpotsApi: HotSpotsApi) : KoinComponent {
     suspend fun getHotSpots(postCode: String): DataResponse<HotSpotsDto> {
         val response = hotSpotsApi.fetchHotSpots(postCode)
 
-        return when (response.status) {
+        return when (response?.status) {
             HttpStatusCode.OK -> DataResponse.Success(response = response.body<HotSpotsDto>())
             else -> DataResponse.Error(
-                errorCode = response.status.value,
-                description = response.status.description
+                errorCode = response?.status?.value,
+                description = response?.status?.description
             )
         }
     }

@@ -1,5 +1,6 @@
 package com.alphaomardiallo.freewifiparis.feature.wifiHotspots.data.remote.api
 
+import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -9,13 +10,19 @@ import org.koin.core.component.KoinComponent
 
 class HotSpotsApi(private val client: HttpClient) : KoinComponent {
 
-    suspend fun fetchHotSpots(postCode: String = "75001"): HttpResponse {
-        return client.get {
-            url("$BASE_URL$URL")
-            parameter("limit", "100")
-            parameter("refine", "etat2:Opérationnel")
-            parameter("refine", "cp:$postCode")
-        }
+    suspend fun fetchHotSpots(postCode: String = "75001"): HttpResponse? {
+        val response = runCatching {
+            client.get {
+                url("$BASE_URL$URL")
+                parameter("limit", "100")
+                parameter("refine", "etat2:Opérationnel")
+                parameter("refine", "cp:$postCode")
+            }
+        }.onFailure {
+            Napier.w(message = "API call failed", throwable = it)
+        }.getOrNull()
+
+        return response
     }
 
     private companion object {
