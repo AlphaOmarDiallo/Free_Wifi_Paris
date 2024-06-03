@@ -23,7 +23,7 @@ androidxNavigationCompose = "2.8.0-beta02"
 androidxLifecycle = "2.8.1"
 maps = "18.2.0"
 maps-compose = "5.0.1"
-maps-utils = "5.0.0"
+maps-utils = "5.0.1"
 
 [libraries]
 # Kotlin test
@@ -79,10 +79,9 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 
 # Google maps
-maps-play-service = { module = "com.google.android.gms:play-services-maps", version.ref = "maps" }
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
-maps-utils = { module = "com.google.maps.android:maps-utils-ktx", version.ref = "maps-utils" }
-maps-ktx = { module = "com.google.maps.android:maps-ktx", version.ref = "maps-utils" }
+maps-utils-ktx = { module = "com.google.maps.android:maps-compose-utils", version.ref = "maps-utils" }
+maps-utils = { module = "com.google.maps.android:maps-compose-widgets", version.ref = "maps-utils" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -97,4 +96,4 @@ ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "k
 compose-android = ["compose-ui", "compose-ui-tooling-preview", "compose-material3", "androidx-activity-compose", "compose-ui-tooling"]
 androidX = ["androidx-lifecycle-compose", "androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx", "androidx-navigation-compose"]
 koinAndroid = ["koin-core", "koin-android", "koin-androidx-compose"]
-maps-android = ["maps-play-service", "maps-compose", "maps-utils", "maps-ktx"]
+maps-android = ["maps-compose", "maps-utils-ktx", "maps-utils"]
