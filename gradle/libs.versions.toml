@@ -16,10 +16,13 @@ kotlinxSerialization = "1.6.3"
 # Android specific
 compileSdk = "34"
 minSdk = "26"
+secretsGradlePlugin = "2.0.1"
 versionCode = "1"
 versionName = "1.0"
 androidxNavigationCompose = "2.8.0-beta01"
 androidxLifecycle = "2.8.0"
+maps = "18.2.0"
+maps-compose = "4.4.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -69,6 +72,13 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
+
+# Google secret
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
+
+# Google maps
+maps-play-service = { module = "com.google.android.gms:play-services-maps", version.ref = "maps" }
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
