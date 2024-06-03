@@ -17,6 +17,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
@@ -46,11 +47,12 @@ android {
 
 dependencies {
     implementation(projects.shared)
-
+    // Compose
     implementation(libs.bundles.compose.android)
+    // AndroidX
     implementation(libs.bundles.androidX)
+    // Koin
     implementation(libs.bundles.koinAndroid)
-
-    implementation(libs.maps.play.service)
-    implementation(libs.maps.compose)
+    // Maps
+    implementation(libs.bundles.maps.android)
 }
