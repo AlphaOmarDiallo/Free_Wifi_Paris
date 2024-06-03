@@ -1,5 +1,6 @@
 package com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots
 
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import org.koin.androidx.compose.koinViewModel
@@ -8,5 +9,7 @@ import org.koin.androidx.compose.koinViewModel
 fun WifiHotSpotsScreen() {
     val viewModel: WifiHotSpotsViewModel = koinViewModel()
 
-    Text(text = "here")
+    Button(onClick = { viewModel.getWifiHotspots() }) {
+        Text(text = "HOTSPOTS")
+    }
 }

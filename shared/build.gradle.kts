@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
         }
         androidMain.dependencies {
+            implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.android)
         }
         iosMain.dependencies {
