@@ -3,7 +3,6 @@ package com.alphaomardiallo.freewifiparis.android
 import android.app.Application
 import com.alphaomardiallo.freewifiparis.android.di.wifiHotSpotsModule
 import com.alphaomardiallo.freewifiparis.di.initKoin
-import io.github.aakira.napier.BuildConfig
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.android.ext.koin.androidContext
