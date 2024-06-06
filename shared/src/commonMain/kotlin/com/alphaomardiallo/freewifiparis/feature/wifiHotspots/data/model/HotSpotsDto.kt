@@ -34,7 +34,7 @@ data class ResultDto(
     @SerialName("geo_shape")
     val geoShapeDto: GeoShapeDto,
     @SerialName("idpw")
-    val id: String,
+    val id: String?,
     @SerialName("nom_site")
     val siteName: String,
     @SerialName("nombre_de_borne_wifi")

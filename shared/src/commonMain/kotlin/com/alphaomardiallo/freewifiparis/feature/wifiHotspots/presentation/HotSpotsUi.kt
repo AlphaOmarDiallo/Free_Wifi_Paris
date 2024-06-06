@@ -11,7 +11,7 @@ data class ResultUi(
     val status: String = "",
     val geoPoint: GeoPoint2dUi = GeoPoint2dUi(),
     val geoShape: GeoShapeUi = GeoShapeUi(),
-    val id: String = "",
+    val id: String? = "",
     val siteName: String = "",
     val numberOfWifiHotspots: Int = 0,
 )

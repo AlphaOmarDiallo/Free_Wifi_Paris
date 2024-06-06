@@ -22,7 +22,7 @@ data class Result(
     val status: String,
     val geoPoint: GeoPoint2d,
     val geoShape: GeoShape,
-    val id: String,
+    val id: String?,
     val siteName: String,
     val numberOfWifiHotspots: Int,
 ) {
