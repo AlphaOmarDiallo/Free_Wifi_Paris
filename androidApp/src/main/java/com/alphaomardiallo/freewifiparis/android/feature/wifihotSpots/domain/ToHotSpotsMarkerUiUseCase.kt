@@ -12,7 +12,7 @@ class ToHotSpotsMarkerUiUseCase : KoinComponent {
         status = hotSpot.status,
         geoPoint = hotSpot.geoPoint,
         geoShape = hotSpot.geoShape,
-        id = hotSpot.id,
+        id = hotSpot.id ?: "",
         siteName = hotSpot.siteName,
         numberOfWifiHotspots = hotSpot.numberOfWifiHotspots
     )

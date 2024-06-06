@@ -24,6 +24,7 @@ androidxLifecycle = "2.8.1"
 maps = "18.2.0"
 maps-compose = "5.0.1"
 maps-utils = "5.0.1"
+moko-res = "0.23.0"
 
 [libraries]
 # Kotlin test
@@ -82,6 +83,10 @@ secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.se
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
 maps-utils-ktx = { module = "com.google.maps.android:maps-compose-utils", version.ref = "maps-utils" }
 maps-utils = { module = "com.google.maps.android:maps-compose-widgets", version.ref = "maps-utils" }
+
+# Moko resources
+moko-resources = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-res" }
+moko-resources-test = { module = "dev.icerock.moko:resources-test", version.ref = "moko-res" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

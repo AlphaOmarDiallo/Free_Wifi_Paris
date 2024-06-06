@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.composable.HotSpotsMarker
+import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.composable.IconColor
 import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.model.HotSpotsMarkerUi
 import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.viewmodel.WifiHotSpotsViewModel
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.ResultUi
@@ -51,35 +53,15 @@ private fun WifiHotSpotsContent(
             cameraPositionState = cameraPositionState
         ) {
 
-
-            /*hotSpots.map { hotSpot ->
-                Marker(
-                    state = MarkerState(
-                        position = LatLng(
-                            hotSpot.geoPoint.lat,
-                            hotSpot.geoPoint.lon
-                        )
-                    ),
-                    contentDescription = hotSpot.siteName,
-                    title = hotSpot.siteName
-                )
-            }*/
-
-            val hotSpotsMarker = hotSpots.map { hotSpot ->
-                HotSpotsMarkerUi(
-                    streetAddress = hotSpot.streetAddress,
-                    postalCode = hotSpot.postalCode,
-                    status = hotSpot.status,
-                    geoPoint = hotSpot.geoPoint,
-                    geoShape = hotSpot.geoShape,
-                    id = hotSpot.id,
-                    siteName = hotSpot.siteName,
-                    numberOfWifiHotspots = hotSpot.numberOfWifiHotspots
-                )
-            }
-
-            Clustering(items = markers)
-
+            Clustering(
+                items = markers,
+                clusterItemContent = { hotSpot ->
+                    HotSpotsMarker(
+                        colors = IconColor().getIconColor(hotSpot.status == "Opérationnel"),
+                        isOperational = hotSpot.status == "Opérationnel"
+                    )
+                }
+            )
         }
     }
 }

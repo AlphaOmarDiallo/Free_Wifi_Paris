@@ -1,10 +1,13 @@
-package com.alphaomardiallo.freewifiparis.android
+package com.alphaomardiallo.freewifiparis.android.common
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +24,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    WifiHotSpotsScreen()
+                    Scaffold(
+                        topBar = {
+                            //TopAppBar(title = { stringResource(id = R.string.app_name) })
+                        }
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(it)
+                        ) {
+                            WifiHotSpotsScreen()
+                        }
+                    }
                 }
             }
         }
