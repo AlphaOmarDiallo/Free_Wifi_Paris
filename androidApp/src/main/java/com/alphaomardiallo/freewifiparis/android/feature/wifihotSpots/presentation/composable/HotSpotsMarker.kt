@@ -26,7 +26,7 @@ fun HotSpotsMarker(
             .height(60.dp)
             .padding(1.dp)
             .drawBehind {
-                drawCircle(color = colors.backgroundColor, style = Fill)
+                drawCircle(color = Color.Gray, style = Fill)
                 drawCircle(color = colors.borderColor, style = Stroke(width = 3f))
             }
             .padding(4.dp)

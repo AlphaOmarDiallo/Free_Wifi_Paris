@@ -37,6 +37,7 @@ import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentati
 import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.composable.IconColor
 import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.model.HotSpotsMarkerUi
 import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.viewmodel.WifiHotSpotsViewModel
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -53,6 +54,7 @@ private const val LATITUDE_PARIS = 48.8566
 private const val LONGITUDE_PARIS = 2.3522
 private const val DEFAULT_ZOOM_LEVEL = 11f
 private const val STREET_ZOOM_LEVEL = 15f
+private const val CAMERA_ANIMATION_DURATION = 1000
 
 @Composable
 fun WifiHotSpotsScreen() {
@@ -97,7 +99,7 @@ private fun WifiHotSpotsContent(
                 clusterItemContent = { hotSpot ->
                     HotSpotsMarker(
                         colors = IconColor().getIconColor(hotSpot.status == "Opérationnel"),
-                        isOperational = hotSpot.status == "Opérationnel"
+                        isOperational = hotSpot.status == "Opérationnel",
                     )
                 },
                 onClusterItemClick = {
@@ -122,8 +124,14 @@ private fun WifiHotSpotsContent(
         currentPosition?.let {
             val zoom =
                 if (cameraPositionState.position.zoom > STREET_ZOOM_LEVEL) cameraPositionState.position.zoom else STREET_ZOOM_LEVEL
-            cameraPositionState.position =
-                CameraPosition.fromLatLngZoom(it, zoom)
+
+            coroutineContext.launch {
+                cameraPositionState.animate(
+                    update = CameraUpdateFactory.newCameraPosition(
+                        CameraPosition(it, zoom, 0f, 0f)
+                    ), durationMs = CAMERA_ANIMATION_DURATION
+                )
+            }
 
             deletePosition.invoke()
         }
