@@ -17,9 +17,9 @@ data class HotSpotsMarkerUi(
 ) : ClusterItem {
     override fun getPosition(): LatLng = LatLng(geoPoint.lat, geoPoint.lon)
 
-    override fun getTitle(): String = siteName
+    override fun getTitle(): String? = null
 
-    override fun getSnippet(): String = status
+    override fun getSnippet(): String? = null
 
-    override fun getZIndex(): Float = 0f
+    override fun getZIndex(): Float = 1f
 }

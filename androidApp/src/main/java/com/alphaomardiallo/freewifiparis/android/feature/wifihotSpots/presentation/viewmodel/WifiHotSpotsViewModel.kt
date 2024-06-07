@@ -8,6 +8,7 @@ import com.alphaomardiallo.freewifiparis.common.domain.DomainResponse
 import com.alphaomardiallo.freewifiparis.common.presentation.ErrorInfoUi
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.usecase.GetWifiHotspotsUseCase
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.HotSpotsUi
+import com.google.android.gms.maps.model.LatLng
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,7 +27,23 @@ class WifiHotSpotsViewModel(
         getWifiHotspots()
     }
 
-    fun getWifiHotspots() {
+    fun savePosition(latitude: Double, longitude: Double) {
+        _uiState.update { state ->
+            state.copy(
+                selectedPosition = LatLng(latitude, longitude)
+            )
+        }
+    }
+
+    fun deletePosition() {
+        _uiState.update { state ->
+            state.copy(
+                selectedPosition = null
+            )
+        }
+    }
+
+    private fun getWifiHotspots() {
         viewModelScope.launch {
             _uiState.update { state ->
                 state.copy(
@@ -84,7 +101,8 @@ class WifiHotSpotsViewModel(
                                     error = ErrorInfoUi(
                                         code = null,
                                         message = null
-                                    )
+                                    ),
+                                    markers = getMarkers()
                                 )
                             }
 
@@ -96,7 +114,7 @@ class WifiHotSpotsViewModel(
         }
     }
 
-    fun getMarkers() = _uiState.value.hotSpotsList.map {
+    private fun getMarkers() = _uiState.value.hotSpotsList.map {
         toHotSpotsMarkerUiUseCase.execute(it)
     }
 
