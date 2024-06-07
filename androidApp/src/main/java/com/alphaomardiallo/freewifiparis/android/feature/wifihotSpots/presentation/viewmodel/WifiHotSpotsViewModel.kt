@@ -7,6 +7,7 @@ import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentati
 import com.alphaomardiallo.freewifiparis.common.domain.DomainResponse
 import com.alphaomardiallo.freewifiparis.common.presentation.ErrorInfoUi
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.usecase.GetWifiHotspotsUseCase
+import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.utils.ParisDistrictList.districtList
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.HotSpotsUi
 import com.google.android.gms.maps.model.LatLng
 import io.github.aakira.napier.Napier
@@ -117,29 +118,4 @@ class WifiHotSpotsViewModel(
     private fun getMarkers() = _uiState.value.hotSpotsList.map {
         toHotSpotsMarkerUiUseCase.execute(it)
     }
-
-    private fun districtList() = listOf(
-        "75001",
-        "75002",
-        "75003",
-        "75004",
-        "75005",
-        "75006",
-        "75007",
-        "75008",
-        "75009",
-        "75010",
-        "75011",
-        "75012",
-        "75013",
-        "75014",
-        "75015",
-        "75016",
-        "75017",
-        "75018",
-        "75019",
-        "75020",
-        "92100",
-        "94380"
-    )
 }

@@ -1,6 +1,7 @@
 package com.alphaomardiallo.freewifiparis.android.common
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.Favorite
@@ -13,19 +14,25 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.alphaomardiallo.freewifiparis.android.R
 import io.github.aakira.napier.Napier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopAppBar() {
+fun MainTopAppBar(favoriteClickAction: () -> Unit) {
     TopAppBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
         actions = {
             Icon(
                 imageVector = Icons.Outlined.Favorite,
                 contentDescription = Icons.Default.Favorite.name,
-                modifier = Modifier.clickable { Napier.i("Clicked on favorite icon") },
+                modifier = Modifier
+                    .clickable {
+                        favoriteClickAction.invoke()
+                        Napier.i("Clicked on favorite icon")
+                    }
+                    .padding(8.dp),
                 tint = MaterialTheme.colorScheme.onPrimary
             )
         },
