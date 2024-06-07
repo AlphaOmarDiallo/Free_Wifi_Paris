@@ -25,9 +25,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Scaffold(
-                        topBar = {
-                            //TopAppBar(title = { stringResource(id = R.string.app_name) })
-                        }
+                        topBar = { MainTopAppBar() }
                     ) {
                         Box(
                             modifier = Modifier
