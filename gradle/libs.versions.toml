@@ -12,6 +12,9 @@ koin = "3.6.0-Beta4"
 koinCompose = "3.6.0-Beta4"
 coroutines = "1.8.1"
 kotlinxSerialization = "1.6.3"
+room = "2.7.0-alpha03"
+sqldelight = "2.0.1"
+androidxLifecycle = "2.8.1"
 
 # Android specific
 compileSdk = "34"
@@ -20,11 +23,11 @@ secretsGradlePlugin = "2.0.1"
 versionCode = "1"
 versionName = "1.0"
 androidxNavigationCompose = "2.8.0-beta02"
-androidxLifecycle = "2.8.1"
 maps = "18.2.0"
 maps-compose = "5.0.1"
 maps-utils = "5.0.1"
 moko-res = "0.23.0"
+playServicesMaps = "18.2.0"
 
 [libraries]
 # Kotlin test
@@ -75,6 +78,7 @@ androidx-lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-co
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidxLifecycle" }
 
 # Google secret
 secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
@@ -88,6 +92,12 @@ maps-utils = { module = "com.google.maps.android:maps-compose-widgets", version.
 moko-resources = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-res" }
 moko-resources-test = { module = "dev.icerock.moko:resources-test", version.ref = "moko-res" }
 
+# SQLdelight
+sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -95,6 +105,7 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]

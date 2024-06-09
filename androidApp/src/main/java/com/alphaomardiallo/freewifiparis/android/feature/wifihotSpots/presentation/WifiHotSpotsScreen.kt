@@ -35,8 +35,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alphaomardiallo.freewifiparis.android.R
 import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.composable.HotSpotsMarker
 import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.composable.IconColor
-import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.model.HotSpotsMarkerUi
-import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.viewmodel.WifiHotSpotsViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -53,18 +51,28 @@ import kotlin.reflect.KFunction2
 private const val LATITUDE_PARIS = 48.8566
 private const val LONGITUDE_PARIS = 2.3522
 private const val DEFAULT_ZOOM_LEVEL = 11f
-private const val STREET_ZOOM_LEVEL = 15f
+private const val STREET_ZOOM_LEVEL = 17f
 private const val CAMERA_ANIMATION_DURATION = 1000
 
 @Composable
 fun WifiHotSpotsScreen() {
-    val viewModel: WifiHotSpotsViewModel = koinViewModel()
+    val viewModel: com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.WifiHotSpotsViewModel =
+        koinViewModel()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     WifiHotSpotsContent(
-        markers = uiState.value.markers,
+        markers = uiState.value.markers.map { marker ->
+            HotSpotsMarkerUiAndroid(
+                siteName = marker.siteName,
+                status = marker.status,
+                streetAddress = marker.streetAddress,
+                postalCode = marker.postalCode,
+                geoPoint = marker.geoPoint
+            )
+        },
         onItemCardClick = viewModel::savePosition,
-        currentPosition = uiState.value.selectedPosition,
+        lat = uiState.value.selectedPositionLat,
+        lon = uiState.value.selectedPositionLon,
         deletePosition = viewModel::deletePosition
     )
 }
@@ -72,13 +80,15 @@ fun WifiHotSpotsScreen() {
 @OptIn(MapsComposeExperimentalApi::class)
 @Composable
 private fun WifiHotSpotsContent(
-    markers: List<HotSpotsMarkerUi> = emptyList(),
+    markers: List<HotSpotsMarkerUiAndroid> = emptyList(),
     onItemCardClick: KFunction2<Double, Double, Unit>,
-    currentPosition: LatLng?,
+    lat: Double? = null,
+    lon: Double? = null,
     deletePosition: () -> Unit,
 ) {
     val pagerState = rememberPagerState(pageCount = { markers.size })
     val coroutineContext = rememberCoroutineScope()
+    val currentPosition = if (lat != null && lon != null) LatLng(lat, lon) else null
 
     Box(modifier = Modifier.fillMaxSize()) {
         val paris = LatLng(LATITUDE_PARIS, LONGITUDE_PARIS)
@@ -94,6 +104,7 @@ private fun WifiHotSpotsContent(
                 zoomControlsEnabled = false,
             )
         ) {
+
             Clustering(
                 items = markers,
                 clusterItemContent = { hotSpot ->
@@ -142,7 +153,7 @@ private fun WifiHotSpotsContent(
 private fun HotSpotsPager(
     onclick: KFunction2<Double, Double, Unit>,
     pagerState: PagerState,
-    hotSpots: List<HotSpotsMarkerUi>,
+    hotSpots: List<HotSpotsMarkerUiAndroid>,
     modifier: Modifier = Modifier,
 ) {
     HorizontalPager(state = pagerState, modifier = modifier.fillMaxWidth()) {
@@ -152,7 +163,10 @@ private fun HotSpotsPager(
 }
 
 @Composable
-private fun HotSpotItemCard(hotSpot: HotSpotsMarkerUi, onclick: KFunction2<Double, Double, Unit>) {
+private fun HotSpotItemCard(
+    hotSpot: HotSpotsMarkerUiAndroid,
+    onclick: KFunction2<Double, Double, Unit>,
+) {
     val context = LocalContext.current
 
     Card(
@@ -218,7 +232,10 @@ private fun HotSpotItemCard(hotSpot: HotSpotsMarkerUi, onclick: KFunction2<Doubl
     }
 }
 
-private fun getHotSpotIndex(markers: List<HotSpotsMarkerUi>, hotSpot: HotSpotsMarkerUi): Int {
+private fun getHotSpotIndex(
+    markers: List<HotSpotsMarkerUiAndroid>,
+    hotSpot: HotSpotsMarkerUiAndroid,
+): Int {
     return markers.indexOf(hotSpot)
 }
 

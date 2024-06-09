@@ -1,6 +1,6 @@
-package com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.domain
+package com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.usecase
 
-import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.model.HotSpotsMarkerUi
+import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.HotSpotsMarkerUi
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.ResultUi
 import org.koin.core.component.KoinComponent
 

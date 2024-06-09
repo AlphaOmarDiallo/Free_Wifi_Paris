@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.serialization)
-    //id("dev.icerock.mobile.multiplatform-resources")
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -13,7 +13,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -22,8 +22,6 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true
-            //export("dev.icerock.moko:resources:0.22.3")
-            //export("dev.icerock.moko:graphics:0.9.0")
         }
     }
 
@@ -40,19 +38,22 @@ kotlin {
 
             api(libs.napier)
 
-            //api(libs.moko.resources)
+            implementation(libs.sqldelight.coroutines)
+
+            implementation(libs.androidx.lifecycle.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
-            //implementation(libs.moko.resources.test)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.android)
+            implementation(libs.sqldelight.android)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.sqldelight.native)
         }
     }
 
@@ -70,8 +71,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
-/*multiplatformResources {
-    multiplatformResourcesPackage = "com.alphaomardiallo.freewifiparis"
-    multiplatformResourcesClassName = "SharedRes"
-}*/
+dependencies {
+    implementation(libs.play.services.maps)
+}

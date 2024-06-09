@@ -1,11 +1,11 @@
-package com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.model
+package com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation
 
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.GeoPoint2dUi
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.GeoShapeUi
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
-data class HotSpotsMarkerUi(
+data class HotSpotsMarkerUiAndroid(
     val streetAddress: String = "",
     val postalCode: String = "",
     val status: String = "",
@@ -17,9 +17,9 @@ data class HotSpotsMarkerUi(
 ) : ClusterItem {
     override fun getPosition(): LatLng = LatLng(geoPoint.lat, geoPoint.lon)
 
-    override fun getTitle(): String? = null
+    override fun getTitle(): String = siteName
 
     override fun getSnippet(): String? = null
 
-    override fun getZIndex(): Float = 1f
+    override fun getZIndex(): Float? = null
 }

@@ -15,7 +15,6 @@ class HotSpotsApi(private val client: HttpClient) : KoinComponent {
             client.get {
                 url("$BASE_URL$URL")
                 parameter("limit", "100")
-                //parameter("refine", "etat2:Opérationnel")
                 parameter("refine", "cp:$postCode")
             }
         }.onFailure {

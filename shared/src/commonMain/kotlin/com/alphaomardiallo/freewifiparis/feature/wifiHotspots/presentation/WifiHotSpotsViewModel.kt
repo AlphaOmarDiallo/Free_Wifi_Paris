@@ -1,15 +1,12 @@
-package com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.viewmodel
+package com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.domain.ToHotSpotsMarkerUiUseCase
-import com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.model.WifiHotSpotsUiState
 import com.alphaomardiallo.freewifiparis.common.domain.DomainResponse
+import com.alphaomardiallo.freewifiparis.common.presentation.BaseViewModel
 import com.alphaomardiallo.freewifiparis.common.presentation.ErrorInfoUi
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.usecase.GetWifiHotspotsUseCase
+import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.usecase.ToHotSpotsMarkerUiUseCase
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.utils.ParisDistrictList.districtList
-import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.HotSpotsUi
-import com.google.android.gms.maps.model.LatLng
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +16,7 @@ import kotlinx.coroutines.launch
 class WifiHotSpotsViewModel(
     private val getWifiHotspotsUseCase: GetWifiHotspotsUseCase,
     private val toHotSpotsMarkerUiUseCase: ToHotSpotsMarkerUiUseCase,
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(WifiHotSpotsUiState())
     val uiState: StateFlow<WifiHotSpotsUiState> = _uiState
@@ -31,7 +28,8 @@ class WifiHotSpotsViewModel(
     fun savePosition(latitude: Double, longitude: Double) {
         _uiState.update { state ->
             state.copy(
-                selectedPosition = LatLng(latitude, longitude)
+                selectedPositionLat = latitude,
+                selectedPositionLon = longitude
             )
         }
     }
@@ -39,7 +37,8 @@ class WifiHotSpotsViewModel(
     fun deletePosition() {
         _uiState.update { state ->
             state.copy(
-                selectedPosition = null
+                selectedPositionLat = null,
+                selectedPositionLon = null
             )
         }
     }

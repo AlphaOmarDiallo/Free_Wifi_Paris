@@ -1,9 +1,6 @@
-package com.alphaomardiallo.freewifiparis.android.feature.wifihotSpots.presentation.model
+package com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation
 
 import com.alphaomardiallo.freewifiparis.common.presentation.ErrorInfoUi
-import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.HotSpotsUi
-import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.ResultUi
-import com.google.android.gms.maps.model.LatLng
 
 data class WifiHotSpotsUiState(
     val wifiHotSpots: HotSpotsUi = HotSpotsUi(),
@@ -11,5 +8,6 @@ data class WifiHotSpotsUiState(
     val isLoading: Boolean = false,
     val error: ErrorInfoUi = ErrorInfoUi(),
     val markers: List<HotSpotsMarkerUi> = emptyList(),
-    val selectedPosition: LatLng? = null,
+    val selectedPositionLat: Double? = null,
+    val selectedPositionLon: Double? = null,
 )

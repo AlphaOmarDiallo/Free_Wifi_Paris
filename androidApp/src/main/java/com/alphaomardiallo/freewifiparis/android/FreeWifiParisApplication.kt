@@ -1,7 +1,6 @@
 package com.alphaomardiallo.freewifiparis.android
 
 import android.app.Application
-import com.alphaomardiallo.freewifiparis.android.di.wifiHotSpotsModule
 import com.alphaomardiallo.freewifiparis.di.initKoin
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
@@ -17,7 +16,6 @@ class FreeWifiParisApplication : Application(), KoinComponent {
         initKoin(enableNetworkLogs = BuildConfig.DEBUG) {
             androidLogger()
             androidContext(this@FreeWifiParisApplication)
-            modules(wifiHotSpotsModule)
         }
 
         if (BuildConfig.DEBUG) {

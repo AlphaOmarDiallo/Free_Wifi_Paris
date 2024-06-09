@@ -5,6 +5,8 @@ import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.data.remote.dataso
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.data.repository.WifiHotspotsRepositoryImpl
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.repository.WifiHotspotsRepository
 import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.usecase.GetWifiHotspotsUseCase
+import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.domain.usecase.ToHotSpotsMarkerUiUseCase
+import com.alphaomardiallo.freewifiparis.feature.wifiHotspots.presentation.WifiHotSpotsViewModel
 import com.alphaomardiallo.freewifiparis.platformModule
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -16,6 +18,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.bind
@@ -33,8 +36,13 @@ val repositories = module {
     singleOf(::WifiHotspotsRepositoryImpl).bind<WifiHotspotsRepository>()
 }
 
+val viewModels = module {
+    factoryOf(::WifiHotSpotsViewModel)
+}
+
 val useCases = module {
     factory { GetWifiHotspotsUseCase(get()) }
+    factory { ToHotSpotsMarkerUiUseCase() }
 }
 
 fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
@@ -46,6 +54,7 @@ fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclarat
             apis,
             dataSources,
             repositories,
+            viewModels,
             useCases
         )
     }
